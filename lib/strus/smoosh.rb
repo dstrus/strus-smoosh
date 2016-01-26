@@ -15,7 +15,8 @@ module Strus
         # map { |item| item.smoosh }.join
         map(&:smoosh).join # equivalent to previous line
       when Hash
-        map { |key, value| key.smoosh + value.smoosh }.smoosh
+        # map { |key, value| key.smoosh + value.smoosh }.smoosh
+        to_a.smoosh
       when Symbol, Fixnum
         to_s.smoosh
       else

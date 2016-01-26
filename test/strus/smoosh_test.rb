@@ -2,6 +2,7 @@ require 'test_helper'
 
 describe Strus::Smoosh do
   before do
+    Strus.smoosh_the_world
     @test_string = " I <3 ruby\n\nyes I do    "
     @test_array = [@test_string, " w00t\n w00t ", "\t\they he\ny"]
     @nested_array = [@test_string, @test_array]
