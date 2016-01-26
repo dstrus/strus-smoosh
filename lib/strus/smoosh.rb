@@ -3,10 +3,37 @@ require "strus/smoosh/version"
 module Strus
   module Smoosh
     def smoosh
-      gsub /[[:space:]]+/, ''
+      case self
+      when String
+        # Also matches subclasses of String
+        gsub /[[:space:]]+/, ''
+      when Array
+        # join.smoosh   # doesn't handle hashes
+        # map { |item| item.smoosh }.join
+        map(&:smoosh).join # equivalent to previous line
+      when Hash
+        map { |key, value| key.smoosh + value.smoosh }.smoosh
+      when Symbol, Fixnum
+        to_s.smoosh
+      else
+        raise NotImplementedError
+      end
     end
   end
 end
 
 # String.include(Strus::Smoosh)
-String.send(:include, Strus::Smoosh)
+Object.send(:include, Strus::Smoosh)
+
+# module CoreExtensions
+#   module String
+#     def smoosh
+#       gsub /[[:space:]]+/, ''
+#     end
+#   end
+#   module Array
+#     def smoosh
+#       # TODO
+#     end
+#   end
+# end
