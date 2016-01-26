@@ -3,7 +3,7 @@ require "strus/smoosh/version"
 module Strus
   module Smoosh
     def smoosh
-      self.split.join
+      gsub /[[:space:]]+/, ''
     end
   end
 end
