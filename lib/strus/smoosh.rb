@@ -1,6 +1,9 @@
 require "strus/smoosh/version"
 
 module Strus
+  def self.smoosh_the_world
+    Object.send(:include, Strus::Smoosh)
+  end
   module Smoosh
     def smoosh
       case self
@@ -23,7 +26,7 @@ module Strus
 end
 
 # String.include(Strus::Smoosh)
-Object.send(:include, Strus::Smoosh)
+
 
 # module CoreExtensions
 #   module String
